@@ -20,7 +20,7 @@
             <h1>My Task Board</h1>
         </div>
         <div id="form">
-            <form class="border p-4 rounded shadow bg-light  " onsubmit=addTask(event) id="myForm">
+            <form id="task-form" class="border p-4 rounded shadow bg-light  " onsubmit=addTask(event) id="myForm">
                 <label class="form-label" for="task-describe">enter the task details</label>
                 <textarea id="task-describe" required></textarea>
                 <br>
@@ -37,8 +37,8 @@
 
             </form>
         </div>
-        <div id="tasks">
-        
+        <div id="tasks-list">
+            
         </div>
     </div>
 </body>

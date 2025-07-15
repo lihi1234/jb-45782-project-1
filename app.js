@@ -4,17 +4,17 @@ let index=0;
 
 window.onload = function () {
 
-    renderTable();
+    renderList();
     
 };
 
 
-function renderTable(){
+function renderList(){
     //let products = JSON.parse(localStorage.getItem("products")) || [];
-    document.getElementById("products-table").innerHTML= "";
-    products.forEach((item, index) => {
-        const tr = CreateNewLi(item, index);
-        document.getElementById("products-table").innerHTML += tr;
+    document.getElementById("tasks-list").innerHTML= "";
+    tasks.forEach((item, index) => {
+        const newTask = CreateNewTask(item, index);
+        document.getElementById("tasks-list").innerHTML += newTask;
         index++;
     });
 
@@ -27,9 +27,11 @@ function addTask(event) {
     event.preventDefault();
     const myData = getData();
     const newTask = CreateNewTask(myData, index);
+    //fadeIn(newTask);
     addToList(newTask);
    
-    console.log(products);
+   index++;
+    console.log(tasks);
     // form.reset();
     saveToLocalStorage(myData);  
     clearForm();
@@ -39,8 +41,8 @@ function addTask(event) {
 }
 
 function saveToLocalStorage(myData){
-    products.push(myData);
-    localStorage.setItem("products", JSON.stringify(products));
+    tasks.push(myData);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 function getData() {
 
@@ -56,35 +58,40 @@ function getData() {
 }
 
 function CreateNewTask(myData, index) {
-    const {}
-    const newTR= `<tr id="${index}">
-                <td>${myData.name} </td>
-                <td>${myData.price} </td>
-                <td>${myData.category} </td>
-                <td> <img src="${myData.pic}"></td>
-                <td ><button onclick="deleteProduct(${index})">delete</button></td>
-            </tr>`
-            index++;
-            return newTR;
+      const { describe, date, time } = myData;
+    const newTask= `<div id="${index}" class="task ">
+    <br><br>
+                    ${describe}
+                    <br>
+                    ${date}
+                    <br>
+                    ${time}
+            </div>`
+            return newTask;
 }
 
-function addToList(newTR) {
+function addToList(newTask) {
 
-    document.getElementById("products-table").innerHTML += newTR;
+    document.getElementById("tasks-list").innerHTML += newTask;
 
 }
 
 function clearForm() {
-    document.getElementById("myForm").reset();
+    document.getElementById("task-form").reset();
 }
 
-function deleteProduct(index){
+function deleteTask(index){
 
     // let animals = JSON.parse(localStorage.getItem("animals") || "[]");
-    products.splice(index, 1); // Remove item at index
-    localStorage.setItem("products", JSON.stringify(products)); // Save new list
-    renderTable(); // Refresh table
+    tasks.splice(index, 1); // Remove item at index
+    localStorage.setItem("tasks", JSON.stringify(tasks)); // Save new list
+    renderList(); // Refresh table
 }
+
+ function fadeIn(index) {
+    //tasks[index].classList.add("fade-in");
+    index.classList.add("fade-in");
+  }
 
 
 
