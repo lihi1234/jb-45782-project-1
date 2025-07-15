@@ -1,0 +1,35 @@
+html, body{
+    margin: 0;
+    height: 100%;
+    background-image: url("images/tile.jpg");
+}
+
+#container>*{
+    border: 1px solid black;
+}
+#container{
+    display: grid;
+    height: 100%;
+    grid-template-rows: 1fr 4fr 8fr;
+ 
+}
+#header{
+    grid-row: 1;
+    flex-direction: row;
+    text-align: center;
+}
+#form{
+    grid-row: 2;
+    background-image: url("images/formbg.jpg");
+    display: flex;
+    flex-direction: column;
+    background-repeat: repeat-y;
+
+}
+#tasks{
+    grid-row: 3;
+}
+h1{
+    font-family: "Fascinate", system-ui;
+
+}

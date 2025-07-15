@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="app.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    
+      
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fascinate&family=Indie+Flower&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="container" class=" justify-content-center align-items-center">
+        <div id="header">
+            <h1>My Task Board</h1>
+        </div>
+        <div id="form">
+            <form class="border p-4 rounded shadow bg-light  " onsubmit=addTask(event) id="myForm">
+                <label class="form-label" for="task-describe">enter the task details</label>
+                <textarea id="task-describe" required></textarea>
+                <br>
+
+                <label class="form-label" for="task-date"> Task completion date</label>
+                <input class="form-control" type="date" id="task-date" required>
+                <br>
+                <label class="form-label" for="task-time"> Task completion time</label>
+                <input class="form-control" type="time" id="task-time" required>
+
+<br>
+                <button class="btn " id="submit">Add task</button>
+                <input type="reset" value="reset">
+
+            </form>
+        </div>
+        <div id="tasks">
+        
+        </div>
+    </div>
+</body>
+
+</html>
