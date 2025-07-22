@@ -1,5 +1,6 @@
-//localStorage.removeItem("products");
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+const TASKS_KEY_NAME = "tasks"
+let tasks = JSON.parse(localStorage.getItem(TASKS_KEY_NAME)) || [];
 let index = 0;
 
 window.onload = function () {
@@ -10,13 +11,15 @@ window.onload = function () {
 
 
 function renderList() {
-    //let products = JSON.parse(localStorage.getItem("products")) || [];
+
     document.getElementById("tasks-list").innerHTML = "";
+    tasksList = "";
     tasks.forEach((item, index) => {
         const newTask = CreateNewTask(item, index);
-        document.getElementById("tasks-list").innerHTML += newTask;
+        tasksList += newTask;
         index++;
     });
+    document.getElementById("tasks-list").innerHTML = tasksList;
 
 
 }
@@ -27,13 +30,9 @@ function addTask(event) {
     event.preventDefault();
     const myData = getData();
     const newTask = CreateNewTask(myData, index);
-    // fadeIn(newTask);
-
     addToList(newTask, true);
-
     index++;
     console.log(tasks);
-    // form.reset();
     saveToLocalStorage(myData);
     clearForm();
 
@@ -43,8 +42,9 @@ function addTask(event) {
 
 function saveToLocalStorage(myData) {
     tasks.push(myData);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem(TASKS_KEY_NAME, JSON.stringify(tasks));
 }
+
 function getData() {
 
     const describe = document.getElementById("task-describe").value
@@ -79,13 +79,13 @@ function CreateNewTask(myData, index) {
 }
 
 function addToList(newTask, isAnimation) {
-         const taskContainer = document.createElement("task-container");
+    const taskContainer = document.createElement("task-container");
 
     if (isAnimation) {
-   
+
         taskContainer.classList.add("fade-in");
     }
-    taskContainer.innerHTML+=newTask;
+    taskContainer.innerHTML += newTask;
     document.getElementById("tasks-list").appendChild(taskContainer);
 
 
@@ -97,12 +97,21 @@ function clearForm() {
 
 function deleteTask(index) {
 
-    // let animals = JSON.parse(localStorage.getItem("animals") || "[]");
     tasks.splice(index, 1); // Remove item at index
-    localStorage.setItem("tasks", JSON.stringify(tasks)); // Save new list
+    localStorage.setItem(TASKS_KEY_NAME, JSON.stringify(tasks)); // Save new list
     renderList(); // Refresh table
 }
 
+function clearAllTasks() {
+    const confirmDelete = confirm("are you sure you want to delete all the tasks");
+    if (confirmDelete)
+    {
+        localStorage.removeItem(TASKS_KEY_NAME);
+        tasks = JSON.parse(localStorage.getItem(TASKS_KEY_NAME)) || [];
+        document.getElementById("tasks-list").innerHTML=tasks;
+    }
+        
+}
 
 
 
